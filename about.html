@@ -2,9 +2,13 @@
 <html>
   
   <head data-gwd-animation-mode="proMode">
-    <title>undefined</title>
+    <title>User Friendly website for Visually Impaired</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="generator" content="Google Web Designer 1.0.3.0115">
+    <script src="jquery.js"></script>
+    <script src="keyboard.js"></script>
+    <script src="mespeak/mespeak.js"></script>
+
     <style type="text/css">
       html, body {
         width: 100%;
@@ -328,13 +332,61 @@
         float: center;
       }
     </style>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      meSpeak.loadConfig("mespeak/mespeak_config.json");
+      meSpeak.loadVoice('mespeak/voices/en/en-us.json');
+      
+      speaktext1(struct1);
+      KeyboardJS.on('shift + ctrl > h', function() {
+        window.location.href = 'apdhome.html';
+      });
+      KeyboardJS.on('shift + ctrl > 1', function() {
+        alert('About profile clicked.')
+      });
+      KeyboardJS.on('shift + ctrl > 2', function() {
+        alert('About team clicked.')
+      });
+      KeyboardJS.on('shift + ctrl > 3', function() {
+        alert('About history clicked.')
+      });
+      KeyboardJS.on('shift + ctrl > 4', function() {
+        alert('About management clicked.')
+      });
+       KeyboardJS.on('shift + ctrl > l', function() {
+        meSpeak.stop();
+        meSpeak.speak(speech);
+      });
+    });
+    var struct1 = {
+      id : ["about-profile","about-team","about-history","about-management"],
+      text:["press ctrl shift 1 to open  Profile","press ctrl shift 2 to open  team","press  ctrl shift 3 to open  history","press ctrl shift 4 to open  management"]
+    }
+    var arra = [];
+    var speech='';
+    function speaktext1(structure){
+      arra = [];
+      speech = '';
+      $.each(structure.text,function(key,value){
+       speech += value + ' \n\n';
+      });
+      $.each(structure.id,function(key,value){
+        arra.push(value);
+      });
+      speech += 'Press control shift l to listen again.\n\n Press control shift h to go to home page.'
+      //$.stephanTalking.speak(speech)
+
+      meSpeak.speak(speech);
+    }
+
+    </script>
   </head>
   
   <body id="body">
     <img src="images/logo.png" class="gwd-img-iccm">
     <div class="gwd-div-5cza"></div>
     <div class="gwd-div-ktfn" id="div1">
-      <a href="apd.html" id="home">Home</a>
+      <a href="apdhome.html" id="home">Home</a>
       <a href="about.html" id="about">Abouts</a>
       <a href="apd.html" id="activities">Activities</a>
       <a href="#" id="contr">Contribute</a>

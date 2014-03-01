@@ -2,9 +2,14 @@
 <html>
   
   <head data-gwd-animation-mode="proMode">
-    <title>undefined</title>
+    <title>User Friendly website for Visually Impaired</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="generator" content="Google Web Designer 1.0.3.0115">
+    <script src="jquery.js"></script>
+    <script src="keyboard.js"></script>
+    <script src="mespeak/mespeak.js"></script>
+
+
     <style type="text/css">
       html, body {
         width: 100%;
@@ -301,6 +306,62 @@
         color: rgb(97, 56, 17);
       }
     </style>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      //$.stephanTalking.speak("hello, how r u?");
+      meSpeak.loadConfig("mespeak/mespeak_config.json");
+      meSpeak.loadVoice('mespeak/voices/en/en-us.json');
+      speaktext1(struct1);
+      KeyboardJS.on('shift + ctrl > 1', function() {
+        console.log('shift ctrl 1!');
+        var href = $('a#'+arra[0]).attr('href');
+        window.location.href = href;
+      });
+      KeyboardJS.on('shift + ctrl > 2', function() {
+        console.log('shift ctrl 2!');
+        var href = $('a#'+arra[1]).attr('href');
+        window.location.href = href;
+      });
+      KeyboardJS.on('shift + ctrl > 3', function() {
+        var href = $('a#'+arra[2]).attr('href');
+        window.location.href = href;
+      });
+      KeyboardJS.on('shift + ctrl > 4', function() {
+        alert('Contribute Clicked.');
+      });
+      KeyboardJS.on('shift + ctrl > 5', function() {
+        alert('Contacts Clicked.');
+      });
+      KeyboardJS.on('shift + ctrl > l', function() {
+        meSpeak.stop();
+        meSpeak.speak(speech);
+      });
+      KeyboardJS.on('shift + ctrl > h', function() {
+        window.location.href = 'apdhome.html'
+      });
+
+    });
+    var struct1 = {
+      id : ["home","about","activities","contr","contact"],
+      text:["press ctrl shift 1 to open home","press ctrl shift 2 to open about","press ctrl shift 3 to open activities","press ctrl shift 4 to open Contribute","press ctrl shift 5 to open contact us"]
+    }
+    var arra = [];
+    var speech='';
+    function speaktext1(structure){
+      arra = [];
+      speech = 'Welcome to APD India\n\n';
+      $.each(structure.text,function(key,value){
+       speech += value + ' \n\n';
+      });
+      $.each(structure.id,function(key,value){
+        arra.push(value);
+      });
+      speech += '\nPress control shift l to listen again.'
+      //$.stephanTalking.speak(speech)
+      meSpeak.speak(speech);
+    }
+    
+    </script>
   </head>
   
   <body id="body">

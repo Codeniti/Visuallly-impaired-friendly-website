@@ -2,9 +2,12 @@
 <html>
   
   <head data-gwd-animation-mode="proMode">
-    <title>undefined</title>
+    <title>User Friendly website for Visually Impaired</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="generator" content="Google Web Designer 1.0.3.0115">
+    <script src="jquery.js"></script>
+    <script src="keyboard.js"></script>
+    <script src="mespeak/mespeak.js"></script>
     <style type="text/css">
       html, body {
         width: 100%;
@@ -272,6 +275,23 @@
         color: rgb(70, 67, 67);
       }
     </style>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      meSpeak.loadConfig("mespeak/mespeak_config.json");
+      meSpeak.loadVoice('mespeak/voices/en/en-us.json');
+      var speech = 'press ctrl shift 1 to listen content in this page';
+      speech += '\n Press control shift h to go to home page.';
+      meSpeak.speak(speech);
+      KeyboardJS.on('shift + ctrl > h', function() {
+        window.location.href = 'apdhome.html'
+      });
+      KeyboardJS.on('shift + ctrl > 1', function() {
+        meSpeak.stop();
+        var content = $('.gwd-span-qvr8').text();
+        meSpeak.speak(content);
+      });
+    });
+    </script>
   </head>
   
   <body id="body">

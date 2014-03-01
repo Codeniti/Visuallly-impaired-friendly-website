@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>User Friendly Website for Visually Impaired</title>
+<script src="jquery.js"></script>
+<script src="keyboard.js"></script>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//speaktext1(struct1);
+	KeyboardJS.on('shift + ctrl > 1', function() {
+    console.log('shift ctrl 1!');
+    console.log(arra[0]);
+	});
+	KeyboardJS.on('shift + ctrl > 2', function() {
+	    console.log('shift ctrl 2!');
+	    console.log(arra[1]);
+	});
+	KeyboardJS.on('shift + ctrl > 3', function() {
+	    console.log('shift ctrl 3!');
+	    console.log(arra[2]);
+	});
+})
+var struct1 = {
+	id : ["home","about","events"],
+	text:["press 1 to open home","press 2 to open about","press 3 to open events"]
+}
+var arra = [];
+function speaktext1(structure){
+	arra = [];
+	var speech='';
+		$.each(structure.text,function(key,value){
+		speech += value + ' \n';
+	});
+	$.each(structure.id,function(key,value){
+		arra.push(value);
+	});
+}
+
+
+</script>
+</head>
+<body>
+<tts id="audio" ></tts>
+<a href="#" class="btn btn-primary" onclick="javascript:hello();">hi</a>
+
+</body>
+</html>
